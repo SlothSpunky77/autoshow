@@ -1,0 +1,167 @@
+<html>
+
+<head>
+  <title>about</title>
+  <link rel="stylesheet" href="/autoshow.css">
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+
+  <script type="text/babel">
+    function About() {
+      return (
+        <div className="body">
+          <div className="navdiv">
+            <div>
+              <h1
+                style={{ fontFamily: 'Optima', color: 'red', paddingLeft: '10px' }}
+                onClick={() => { window.location.href = '/'; }}>
+                Autoshow
+              </h1>
+            </div>
+            <ul>
+              <li><a href="/" className="baritems">home</a></li>
+              <li>
+                <a className="baritems">make</a>
+                <ul className="dropdown">
+                  <li><a href="/showcase/toyota" className="baritems">toyota</a></li>
+                  <li><a href="/showcase/mazda" className="baritems">mazda</a></li>
+                  <li><a href="/showcase/mitsu" className="baritems">mitsubishi</a></li>
+                  <li><a href="/showcase/porsche" className="baritems">porsche</a></li>
+                  <li><a href="/showcase/honda" className="baritems">honda</a></li>
+                  <li><a href="/showcase/merc" className="baritems">mercedes benz</a></li>
+                  <li><a href="/showcase/nissan" className="baritems">nissan</a></li>
+                </ul>
+              </li>
+              <li><a href="/about" className="baritems" style={{ borderBottom: '2px solid red' }}>about</a></li>
+            </ul>
+          </div>
+
+          <div className="content-container">
+            <div className="about-content">
+              <h2>Welcome to Autoshow</h2>
+              <p>At Autoshow, we're passionate about automobiles. We've created a space dedicated to showcasing the finest cars from around the world, where enthusiasts like you can explore, admire, and learn about these remarkable machines.</p>
+              <p>Cars are more than just vehicles; they're marvels of engineering, design, and innovation. We're driven by a deep love for these masterpieces on wheels and the stories they tell. Our goal is to bring you closer to the beauty and brilliance of automobiles.</p>
+            </div>
+
+          </div>
+          <div class="about_us">
+            <div className="creator-info">
+              <p className="name">Srilakshmana Amaresh M </p>
+              <p className="name">Contact us at: amareshmandavilli@gmail.com</p>
+              <div className="image">
+                <a href="https://github.com/amaresh-X64" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/amaresh-mandavalli-5461b027b/" target="_blank" rel="noopener noreferrer"><i style={{ marginLeft: '20px' }} class="fa-brands fa-linkedin"></i></a>
+              </div>
+            </div>
+            <div className="creator-info">
+              <p className="name">Shashank Udyavar </p>
+              <p className="name">Contact us at: udyavarshashank@gmail.com</p>
+              <div className="image">
+                <a href="https://github.com/SlothSpunky77" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shashank-udyavar-3620b714b/" target="_blank" rel="noopener noreferrer"><i style={{ marginLeft: '20px' }} class="fa-brands fa-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      );
+    }
+
+    ReactDOM.render(
+      <About />,
+      document.getElementById('root')
+    );
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: rgb(2, 0, 36);
+      background: linear-gradient(103deg, rgba(2, 0, 36, 1) 0%, rgba(96, 3, 3, 1) 20%, rgba(36, 0, 0, 1) 62%, rgba(32, 0, 0, 1) 100%);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: white;
+      overflow: hidden;
+    }
+
+
+    .content-container {
+      display: grid;
+      gap: 20px;
+      padding: 20px;
+      opacity: 0;
+      animation: slideFromSides 1.5s ease-out forwards;
+      grid-template-columns: 97%;
+    }
+
+    @keyframes slideFromSides {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .about-content,
+    .creator-info {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: red;
+      font-size: larger;
+    }
+
+    .about-content {
+      width: 100%;
+    }
+
+    .creator-info {
+      width: 90%;
+      height: 100%;
+
+    }
+
+    .about_us {
+      padding: 20px;
+      display: grid;
+      height: 45%;
+      grid-template-columns: 51% 51%;
+      animation: slideFromSides 1s ease-out forwards;
+    }
+
+    .dropdown {
+      z-index: 1;
+    }
+
+    .name {
+      text-align: center;
+    }
+
+    .image {
+      position: relative;
+      left: 39%;
+    }
+
+    svg {
+      color: aliceblue;
+      font-size: 60px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <title>showcase</title>
+    <link rel="stylesheet" href="/autoshow.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        async function fetchLogos() {
+            try {
+                const response = await fetch('/getLogos');
+                const logos = await response.json();
+                return logos;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function fetchCarStats(make, model) {
+            try {
+                const response = await fetch(`/getCarStats/${make}/${model}`);
+                const stats = await response.json();
+                return stats;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function showCarImage(imagePath, make, model) {
+            try {
+                var carImage = document.getElementById('car-image');
+                carImage.style.opacity = 0;
+
+                setTimeout(async function () {
+                    carImage.src = imagePath;
+                    carImage.style.opacity = 1;
+
+                    // Fetch and display car stats
+                    const stats = await fetchCarStats(make, model);
+                    displayCarStats(stats);
+                }, 370);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function displayCarStats(stats) {
+            // Display all car stats in stats-div
+            var statsDiv = document.getElementById('stats-div');
+            statsDiv.innerHTML = `
+            <p style="color: white;">Acceleration: ${stats.acceleration}</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: ${(stats.acceleration) * 10}%"></div>
+        </div>
+
+        <p style="color: white;">Speed: ${stats.speed}</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: ${(stats.speed) * 10}%"></div>
+        </div>
+
+        <p style="color: white;">Launch: ${stats.launch}</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: ${(stats.launch) * 10}%"></div>
+        </div>
+
+        <p style="color: white;">Braking: ${stats.braking}</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: ${(stats.braking) * 10}%"></div>
+        </div>
+
+        <p style="color: white;">Handling: ${stats.handling}</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: ${(stats.handling) * 10}%"></div>
+        </div>
+        `;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="navdiv">
+        <div>
+            <h1 style="font-family: Optima; color: red; padding-left: 10px;">Autoshow</h1>
+        </div>
+        <ul>
+            <li><a href="/" class="baritems">home</a></li>
+            <li>
+                <a class="baritems" style="border-bottom: 2px solid red;">make</a>
+                <ul class="dropdown">
+                    <li><a href="/showcase/toyota" class="baritems">toyota</a></li>
+                    <li><a href="/showcase/mazda" class="baritems">mazda</a></li>
+                    <li><a href="/showcase/mitsu" class="baritems">mitsubishi</a></li>
+                    <li><a href="/showcase/porsche" class="baritems">porsche</a></li>
+                    <li><a href="/showcase/honda" class="baritems">honda</a></li>
+                    <li><a href="/showcase/merc" class="baritems">mercedes</a></li>
+                    <li><a href="/showcase/nissan" class="baritems">nissan</a></li>
+                </ul>
+            </li>
+            <li><a href="/about" class="baritems">about</a></li>
+        </ul>
+    </div>
+    <div id="main-div" class="clearfix">
+        <div id="left-div">
+            <div id="car-div">
+                <% for (let key of Object.keys(cars._doc[make])) { %>
+                    <img src="<%= cars._doc[make][key].images %>" alt="Car Image" id="car-image">
+                    <% } %>
+            </div>
+        </div>
+        <div id="right-div">
+            <div id="logo-div">
+                <img id="logo-image" alt="Car Logo" src="<%= logos[make] %>">
+            </div>
+            <div id="stats-div" style="padding: 1%;">
+                <div id="car-stats">
+                    <p style="color: white; padding-left: 2%;">Click on any of the cars to view its stats.</p>
+                    <!-- <p style="color: white;">Acceleration: <%= cars._doc[make][Object.keys(cars._doc[make])[0]].acceleration %>
+                    </p>
+                    <p style="color: white;">Speed: <%= cars._doc[make][Object.keys(cars._doc[make])[0]].speed %>
+                    </p>
+                    <p style="color: white;">Launch: <%= cars._doc[make][Object.keys(cars._doc[make])[0]].launch %>
+                    </p>
+                    <p style="color: white;">Braking: <%= cars._doc[make][Object.keys(cars._doc[make])[0]].braking %>
+                    </p>
+                    <p style="color: white;">Handling: <%= cars._doc[make][Object.keys(cars._doc[make])[0]].handling %>
+                    </p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-div" class="clearfix">
+        <div class="select-car" id="car1">
+            <img src="<%= imagePaths[0] %>" alt="Car 1"
+                onclick="showCarImage('<%= imagePaths[0] %>', '<%= make %>', '<%= Object.keys(cars._doc[make])[0] %>')">
+        </div>
+        <div class="select-car" id="car2">
+            <img src="<%= imagePaths[1] %>" alt="Car 2"
+                onclick="showCarImage('<%= imagePaths[1] %>', '<%= make %>', '<%= Object.keys(cars._doc[make])[1] %>')">
+        </div>
+        <div class="select-car" id="car3">
+            <img src="<%= imagePaths[2] %>" alt="Car 3"
+                onclick="showCarImage('<%= imagePaths[2] %>', '<%= make %>', '<%= Object.keys(cars._doc[make])[2] %>')">
+        </div>
+        <div class="select-car" id="car4">
+            <img src="<%= imagePaths[3] %>" alt="Car 4"
+                onclick="showCarImage('<%= imagePaths[3] %>', '<%= make %>', '<%= Object.keys(cars._doc[make])[3] %>')">
+        </div>
+    </div>
+
+</body>
+
+</html>

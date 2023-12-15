@@ -1,0 +1,126 @@
+<html>
+
+<head>
+  <title>autoshow</title>
+  <link rel="stylesheet" href="/autoshow.css">
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div class="navdiv">
+    <div>
+      <h1 style="font-family: Optima; color: red; padding-left: 10px;">Autoshow</h1>
+    </div>
+    <ul>
+      <li><a href="/" class="baritems" style="border-bottom: 2px solid red;">home</a></li>
+      <li>
+        <a class="baritems">make</a>
+        <ul class="dropdown" style="z-index: 1;">
+          <li><a href="/showcase/toyota" class="baritems">toyota</a></li>
+          <li><a href="/showcase/mazda" class="baritems">mazda</a></li>
+          <li><a href="/showcase/mitsu" class="baritems">mitsubishi</a></li>
+          <li><a href="/showcase/porsche" class="baritems">porsche</a></li>
+          <li><a href="/showcase/honda" class="baritems">honda</a></li>
+          <li><a href="/showcase/merc" class="baritems">mercedes</a></li>
+          <li><a href="/showcase/nissan" class="baritems">nissan</a></li>
+        </ul>
+      </li>
+      <li><a href="/about" class="baritems">about</a></li>
+    </ul>
+  </div>
+
+  <div id="slideshow"></div>
+  <script type="text/babel">
+    class SlideShow extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          images: [
+            {
+              src: '/img/zhonda.png', url: '/showcase/honda',
+            },
+            {
+              src: '/img/zmazdaa.png', url: "/showcase/mazda",
+            },
+            {
+              src: '/img/zmitsu.png', url: "/showcase/mitsu",
+            },
+            {
+              src: '/img/znissan.png', url: "/showcase/nissan",
+            },
+            {
+              src: '/img/zporsche.png', url: "/showcase/porsche",
+            },
+            {
+              src: '/img/ztoyota.png', url: "/showcase/toyota",
+            },
+            {
+              src: '/img/zmerc.png', url: "/showcase/merc",
+            },
+          ],
+          currentIndex: 0,
+        };
+      }
+
+      componentDidMount() {
+        this.intervalId = setInterval(this.handleNext,5000);
+      }
+      componentWillUnmount() {
+        clearInterval(this.intervalId);
+      }
+
+      handleNext = () => {
+        this.setState(
+          (prevState) => ({
+            currentIndex: (prevState.currentIndex + 1) % this.state.images.length,
+          })
+        );
+      };
+      handlePrev = () => {
+        this.setState(
+          (prevState) => ({
+            currentIndex: (prevState.currentIndex - 1 + this.state.images.length) % this.state.images.length,
+          })
+        );
+      };
+      handleClick = () => {
+        const { images, currentIndex } = this.state;
+        window.location.href = images[currentIndex].url;
+      };
+
+      render() {
+        const { images, currentIndex } = this.state;
+        const currentImage = images[currentIndex];
+        const nextImage = images[(currentIndex + 1) % images.length];
+        return (
+          <div className="container">
+            <div className="fade">
+              <img
+                src={currentImage.src}
+                alt="slideshow"
+                onClick={this.handleClick}
+                className={"slideshow-image active"}
+              />
+              <img
+                src={nextImage.src}
+                alt="slideshow"
+                className={"slideshow-image"}
+              />
+            </div>
+            <div className="arrowleft">
+              <button onClick={this.handlePrev}>&lt;</button>
+            </div>
+            <div className="arrowright">
+              <button onClick={this.handleNext}>&gt;</button>
+            </div>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<SlideShow />, document.getElementById('slideshow'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: 'Optima';
+  src: url('OptimaLTPro-DemiBoldItalic.woff2') format('woff2');
+}
+
+.navdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.baritems {
+  text-decoration: none;
+  display: block;
+  color: white;
+  font-family: 'Optima';
+  padding: 0px 25px;
+  text-align: center;
+  width: 60px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  display: inline-block;
+  position: relative;
+}
+
+ul li ul.dropdown li {
+  display: block;
+}
+
+ul li ul.dropdown {
+  background-color: black;
+  width: auto;
+  position: absolute;
+  display: none;
+}
+
+ul li a:hover {
+  background-color: rgb(40, 40, 40);
+}
+
+ul li:hover ul.dropdown {
+  display: block;
+}
+
+.slideshow-image {
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: fadeInOut 5s ease-in-out infinite;
+}
+
+.slideshow-image .active {
+  opacity: 1;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+  }
+}
+
+.fade {
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 85%;
+}
+
+.arrowleft {
+  position: absolute;
+  top: 50%;
+  right: 95%;
+}
+
+.arrowright {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+}
+
+.arrowleft button,
+.arrowright button {
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#main-div {
+  width: 100%;
+  height: 65%;
+  background-color: rgb(255, 77, 77);
+}
+
+#left-div {
+  width: 70%;
+  height: 100%;
+  float: left;
+  background-color: rgb(134, 41, 41);
+}
+
+#right-div {
+  width: 30%;
+  height: 100%;
+  float: right;
+  background-color: rgb(255, 0, 0);
+}
+
+#car-div {
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(87, 0, 0, 1) 0%, rgba(55, 1, 1, 1) 17%, rgba(0, 0, 0, 1) 100%);
+}
+
+#car-div img {
+  max-width: 100%;
+  max-height: 100%;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+#logo-div {
+  width: 100%;
+  height: 20%;
+  float: top;
+  justify-content: center;
+  display: flex;
+  background: rgb(101, 0, 0);
+  background: radial-gradient(circle, rgb(162, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+#logo-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#stats-div {
+  width: 100%;
+  height: 80%;
+  float: bottom;
+  background: rgb(101, 0, 0);
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgb(81, 0, 0) 100%);
+}
+
+#bottom-div {
+  width: 100%;
+  height: 35%;
+  background-color: rgb(125, 0, 0);
+}
+
+#bottom-div .select-car {
+  width: 25%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(55, 1, 1, 1) 83%, rgba(87, 0, 0, 1) 100%);
+  float: left;
+}
+
+#bottom-div .select-car img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#car-div,
+#logo-div,
+#stats-div,
+#bottom-div .select-car {
+  border: 2px solid rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  height: 15px;
+  padding: 4px;
+  background-color: #000000;
+}
+
+.progress {
+  height: 100%;
+  background-color: #ffffff;
+}
